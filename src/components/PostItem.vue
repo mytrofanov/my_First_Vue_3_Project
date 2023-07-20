@@ -5,7 +5,9 @@
       <div><strong>Text:</strong> {{ post.body }}</div>
     </div>
     <div class="post__btns">
-      <custom-button> Delete </custom-button>
+      <custom-button>
+        Delete
+      </custom-button>
     </div>
   </div>
 </template>
