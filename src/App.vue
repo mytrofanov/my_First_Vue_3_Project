@@ -1,19 +1,19 @@
 <template>
   <div class="app">
-    <form>
+    <form @submit.prevent>
       <input
         class="form-input"
         type="text"
         placeholder="Add title"
         v-bind:value="post.title"
-        @input="onInputTitleChange"
+        @input="post.title = $event.target.value"
       >
       <input
         class="form-input"
         type="text"
         placeholder="Add text"
         v-bind:value="post.body"
-        @input="onInputBodyChange"
+        @input="post.body = $event.target.value"
       >
       <button
         type="submit"
@@ -47,14 +47,16 @@ export default {
   },
   methods: {
     createPost () {
-
+      const newPost = {
+        id: Date.now(),
+        ...this.post,
+      }
+      this.posts = [newPost, ...this.posts]
+      this.post = {
+        title: '',
+        body: '',
+      }
     },
-    onInputTitleChange (event) {
-      this.post.title = event.target.value
-    },
-    onInputBodyChange (event) {
-      this.post.body = event.target.value
-    }
   }
 }
 </script>
