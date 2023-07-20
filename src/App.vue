@@ -1,37 +1,22 @@
 <template>
   <div class="app">
-    <form @submit.prevent>
-      <input
-        class="form-input"
-        type="text"
-        placeholder="Add title"
-        v-bind:value="post.title"
-        @input="post.title = $event.target.value"
-      >
-      <input
-        class="form-input"
-        type="text"
-        placeholder="Add text"
-        v-bind:value="post.body"
-        @input="post.body = $event.target.value"
-      >
-      <button
-        type="submit"
-        class="submit-button"
-        @click="createPost">
-        Add post
-      </button>
-    </form>
-
-      <div class="post" v-for="post in posts">
-        <div><strong>Title:</strong> {{post.title}}</div>
-        <div><strong>Text:</strong> {{post.body}}</div>
-      </div>
+    <post-form
+      @create-new-post="addPost"
+    />
+    <post-list
+      :posts="posts"
+    />
   </div>
 </template>
 
 <script>
+import PostForm from "@/components/PostForm.vue";
+import PostList from "@/components/PostList.vue";
+
 export default {
+  components: {
+    PostForm, PostList
+  },
   data () {
     return {
       posts: [
@@ -39,25 +24,14 @@ export default {
         {id: 2, title: 'Some title', body: 'Some text alsdkjfl jvlkalf nvlnla lanfn lvnflnad'},
         {id: 3, title: 'Some title', body: 'Some text alsdkjfl jvlkalf nvlnla lanfn lvnflnad'},
       ],
-      post: {
-        title: '',
-        body: '',
-      }
     }
   },
   methods: {
-    createPost () {
-      const newPost = {
-        id: Date.now(),
-        ...this.post,
-      }
+    addPost (newPost) {
       this.posts = [newPost, ...this.posts]
-      this.post = {
-        title: '',
-        body: '',
-      }
     },
   }
+
 }
 </script>
 
@@ -70,27 +44,5 @@ export default {
 .app{
     padding: 24px;
 }
-form{
-    display: flex;
-    flex-direction: column;
-}
-.post {
-    margin-top: 16px;
-    padding: 16px;
-    border: 2px solid olivedrab;
-}
-.form-input{
-    width: 100%;
-    border: 1px solid olivedrab;
-    padding: 10px 15px;
-    margin-top: 15px;
-}
-.submit-button{
-    align-self: flex-end;
-    margin-top: 16px;
-    padding: 8px 16px;
-    background: none;
-    color: olivedrab;
-    border: 1px solid olivedrab;
-}
+
 </style>
