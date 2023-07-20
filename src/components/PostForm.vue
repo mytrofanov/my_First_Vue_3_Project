@@ -14,16 +14,17 @@
       v-model="post.body"
       @input="post.body = $event.target.value"
     />
-    <custom-button class="submit-button">
+    <custom-button
+      class="submit-button"
+      @click="createPost"
+    >
       Add post
     </custom-button>
   </form>
 </template>
 
 <script>
-import CustomButton from '@/components/UI/CustomButton.vue'
 export default {
-  components: { CustomButton },
   emits: ['create-new-post'],
   data() {
     return {
@@ -59,6 +60,7 @@ form {
   margin-top: 15px;
 }
 .submit-button {
+    margin-top: 16px;
     align-self: flex-end;
 }
 </style>
