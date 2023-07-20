@@ -1,9 +1,26 @@
 <template>
   <div class="app">
-    <form action="">
-      <input class="form-input" type="text" placeholder="Add title">
-      <input class="form-input" type="text" placeholder="Add text">
-      <button type="submit" class="submit-button">Add post</button>
+    <form>
+      <input
+        class="form-input"
+        type="text"
+        placeholder="Add title"
+        v-bind:value="post.title"
+        @input="onInputTitleChange"
+      >
+      <input
+        class="form-input"
+        type="text"
+        placeholder="Add text"
+        v-bind:value="post.body"
+        @input="onInputBodyChange"
+      >
+      <button
+        type="submit"
+        class="submit-button"
+        @click="createPost">
+        Add post
+      </button>
     </form>
 
       <div class="post" v-for="post in posts">
@@ -21,11 +38,23 @@ export default {
         {id: 1, title: 'Some title', body: 'Some text alsdkjfl jvlkalf nvlnla lanfn lvnflnad'},
         {id: 2, title: 'Some title', body: 'Some text alsdkjfl jvlkalf nvlnla lanfn lvnflnad'},
         {id: 3, title: 'Some title', body: 'Some text alsdkjfl jvlkalf nvlnla lanfn lvnflnad'},
-      ]
+      ],
+      post: {
+        title: '',
+        body: '',
+      }
     }
   },
   methods: {
+    createPost () {
 
+    },
+    onInputTitleChange (event) {
+      this.post.title = event.target.value
+    },
+    onInputBodyChange (event) {
+      this.post.body = event.target.value
+    }
   }
 }
 </script>
